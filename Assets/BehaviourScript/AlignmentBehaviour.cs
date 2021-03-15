@@ -15,7 +15,6 @@ public class AlignmentBehaviour : FilteredFlockBehaviour
             return agent.transform.up;
         }
 
-
         //Add all points together and average
         Vector2 alignmentMove = Vector2.zero;
 

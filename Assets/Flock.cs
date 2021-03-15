@@ -8,6 +8,10 @@ public class Flock : MonoBehaviour
     public FlockAgent agentPrefab;
     List<FlockAgent> agents = new List<FlockAgent>();
     public FlockBehaviour behaviour;
+    public LeaderFollowBehaviour leaderBehaviour;
+    public float leaderFollowWeight;
+    public float arrivalRadius;
+    public float force;
 
     [Range(10, 500)]
     public int startingCount = 250;
@@ -64,14 +68,17 @@ public class Flock : MonoBehaviour
             //agent.GetComponentInChildren<SpriteRenderer>().color = Color.Lerp(Color.white, Color.red, context.Count / 6f);
 
             Vector2 move = behaviour.CalculateMove(agent, context, this);
-            move *= driveFactor;
+
+            move += leaderFollowWeight * leaderBehaviour.FollowLeader();
+
+            //move *= driveFactor;
 
             if (move.sqrMagnitude > squareMaxSpeed)
             {
                 move = move.normalized * maxSpeed;
             }
-
-            agent.Move(move);
+            Debug.Log(move);
+            agent.Move(move, maxSpeed, force, arrivalRadius);
         }
     }
 
