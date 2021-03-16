@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Flock : MonoBehaviour
 {
-
+    public FlockBehaviour avoidance;
+    public float avoidanceWeight;
     public FlockAgent agentPrefab;
     List<FlockAgent> agents = new List<FlockAgent>();
     public FlockBehaviour behaviour;
     public LeaderFollowBehaviour leaderBehaviour;
-    public float leaderFollowWeight;
     public float arrivalRadius;
     public float force;
 
@@ -69,16 +69,18 @@ public class Flock : MonoBehaviour
 
             Vector2 move = behaviour.CalculateMove(agent, context, this);
 
-            move += leaderFollowWeight * leaderBehaviour.FollowLeader();
+            move += leaderBehaviour.LeaderSteeredPosition(agent, maxSpeed);
 
-            //move *= driveFactor;
+            move += avoidanceWeight * leaderBehaviour.LeaderAvoidBehaviour(agent, context);
 
             if (move.sqrMagnitude > squareMaxSpeed)
             {
                 move = move.normalized * maxSpeed;
             }
+
             Debug.Log(move);
-            agent.Move(move, maxSpeed, force, arrivalRadius);
+
+            agent.Move(move);
         }
     }
 

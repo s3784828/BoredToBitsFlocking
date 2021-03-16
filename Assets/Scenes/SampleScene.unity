@@ -246,17 +246,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1685586f3a426c4281370fbceee49a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avoidance: {fileID: 11400000, guid: b305abb7c5bfb3b44a8f9275a32da0f0, type: 2}
+  avoidanceWeight: 10
   agentPrefab: {fileID: 5686497824709733269, guid: abe0f58e9d0ce3d49930e83382282784, type: 3}
   behaviour: {fileID: 11400000, guid: 84e126c72259b214183f6f74420b3169, type: 2}
   leaderBehaviour: {fileID: 870976620}
-  leaderFollowWeight: 1
   arrivalRadius: 10
   force: 30
   startingCount: 58
   driveFactor: 10
-  maxSpeed: 7.4
+  maxSpeed: 6.4
   neighbourRadius: 1.5
-  avoidanceRadiusMultiplier: 0.5
+  avoidanceRadiusMultiplier: 1
 --- !u!4 &870976619
 Transform:
   m_ObjectHideFlags: 0
@@ -286,7 +287,10 @@ MonoBehaviour:
   leaderRB: {fileID: 442558003}
   leaderTransform: {fileID: 442558004}
   debug: {fileID: 938205078}
+  seperationRadius: 2
+  maxSeperation: 20
   leaderBehindDistance: 5
+  weight: 0.00085
 --- !u!1 &938205078
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +371,7 @@ Transform:
   m_LocalScale: {x: 0.1864, y: 0.1864, z: 0.1864}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1387434093
 GameObject:
@@ -463,7 +467,7 @@ Transform:
   m_LocalScale: {x: 0.078272164, y: 0.07689629, z: 0.06948878}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1469026539 stripped
 GameObject:
@@ -568,60 +572,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!1 &1601303582
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1601303584}
-  - component: {fileID: 1601303583}
-  m_Layer: 0
-  m_Name: Flock Orange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1601303583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1601303582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1685586f3a426c4281370fbceee49a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 5686497824709733269, guid: a84f0a27f47026b46b7da9a8012810ee, type: 3}
-  behaviour: {fileID: 11400000, guid: 53554e2b9359bff448345094187836c4, type: 2}
-  leaderBehaviour: {fileID: 0}
-  leaderFollowWeight: 0
-  arrivalRadius: 0
-  force: 0
-  startingCount: 97
-  driveFactor: 10
-  maxSpeed: 5
-  neighbourRadius: 1.5
-  avoidanceRadiusMultiplier: 0.5
---- !u!4 &1601303584
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1601303582}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1717121743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -647,7 +597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5091941827344201941, guid: a55263c66c3e41c458133637e8258bfe, type: 3}
       propertyPath: maxSpeed
-      value: 30
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 5091941827344201941, guid: a55263c66c3e41c458133637e8258bfe, type: 3}
       propertyPath: targetLocation
@@ -655,7 +605,7 @@ PrefabInstance:
       objectReference: {fileID: 1387434096}
     - target: {fileID: 5256244662631453241, guid: a55263c66c3e41c458133637e8258bfe, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5256244662631453241, guid: a55263c66c3e41c458133637e8258bfe, type: 3}
       propertyPath: m_LocalPosition.x

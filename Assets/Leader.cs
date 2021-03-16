@@ -47,9 +47,7 @@ public class Leader : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
-        //rb.AddForce(new Vector2(x * maxSpeed, y * maxSpeed) * Time.fixedDeltaTime);
         rb.velocity = new Vector2(x * maxSpeed, y * maxSpeed) * Time.fixedDeltaTime;
-        //Debug.Log(rb.velocity);
     }
 
     void Seek()
@@ -69,27 +67,9 @@ public class Leader : MonoBehaviour
         rb.AddForce(steer * Time.fixedDeltaTime, ForceMode2D.Impulse);
     }
 
-    void Arrival()
-    {
-        Vector2 targetOffset = MousePosition() - (Vector2)transform.position;
-        float distance = Mathf.Sqrt(targetOffset.x * targetOffset.x + targetOffset.y * targetOffset.y);
-        float rampedSpeed = maxSpeed * (distance / slowingDistance);
-        float clippedSpeed = Mathf.Min(rampedSpeed, maxSpeed);
-        float desiredVelocityModifier = (clippedSpeed / slowingDistance);
-        Vector2 desiredVelocity = targetOffset * desiredVelocityModifier;
-        Vector2 steeredDirection = DetermineSteeringVelocity(desiredVelocity, rb.velocity);
-
-        rb.AddForce(steeredDirection * Time.fixedDeltaTime);
-    }
-
     void FaceVelocity()
     {
         transform.up = rb.velocity.normalized;
-    }
-
-    Vector2 MousePosition()
-    {
-        return (Vector2) Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y)); 
     }
 
     void VisualiseSteeing(Vector2 steer, Vector2 desiredVelocity)
