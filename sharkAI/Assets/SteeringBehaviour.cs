@@ -34,10 +34,11 @@ public class SteeringBehaviour : MonoBehaviour
         lr.SetPosition(0, transform.position);
         Vector3 secondPosition = rb.velocity.normalized;
         lr.SetPosition(1, transform.position + secondPosition * avoidanceDistance);
-
+        lr.SetColors(Color.blue, Color.blue);
         if (!CanAvoid())
         {
             rb.velocity += steer * Time.fixedDeltaTime;
+            //rb.AddForce(steer * Time.fixedDeltaTime);
         }
         else
         {
@@ -61,6 +62,7 @@ public class SteeringBehaviour : MonoBehaviour
         }
 
         rb.velocity += avoidanceVector * Time.fixedDeltaTime;
+        //rb.AddForce(avoidanceVector * Time.fixedDeltaTime);
     }
 
     public bool CanAvoid()
